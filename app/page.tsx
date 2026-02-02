@@ -1,7 +1,16 @@
+import Header from '@/components/header';
+
+
 export default function Home() {
+ 
   return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold">SyncUp</h1>
-    </main>
+    <>
+      <Header/>
+      <main className='flex justify-center'>
+
+      <button className="font-bold">Check</button>
+      <div className='result'> </div>
+       </main>
+    </>
   )
 }
