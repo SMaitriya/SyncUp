@@ -33,7 +33,7 @@ export default function Schedule1() {
   }
 
   function addSchedules(day: string, activity: string, startTime: string, endTime: string) {
-    setDayInput([...dayInput, {day: day, activity: act, startTime: startT, endTime: endT}]);
+    setDayInput([...dayInput, { day, activity, startTime, endTime }]);
   }
   return (
     <>
@@ -45,24 +45,25 @@ export default function Schedule1() {
               {day}
               <button
                 onClick={() => {
-                  addSchedules(day);
+                  addSchedules(day, activity[0], "", "");
                 }}
                 className="border-2 rounded-full p-1 hover:cursor-auto"
               >
                 add
               </button>
               <div className="schedule">
-                {dayInput.includes(day) && (
-                    <>
-                  <select>
-                    {activity.map((act) => (
-                      <option value={act}>{act}</option>
-                    ))}
-                  </select>
-                  <input type="time"></input>
-                   </>
-                )}
-               
+                {dayInput.filter((item) => item.day === day).map((item, index) => (
+                  <div key={index}>
+                    <select value={item.activity}>
+                      {activity.map((act) => (
+                        <option key={act} value={act}>{act}</option>
+                      ))}
+                    </select>
+                    <input type="time" value={item.startTime}/>
+                     <input type="time" value={item.endTime}/>
+                  </div>
+                ))}
+              
               </div>
             </li>
           ))}
