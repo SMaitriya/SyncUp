@@ -26,6 +26,7 @@ export default function Schedule1() {
       const [endTimeInput, setEndTimeInput] = useState<string>('');
 
   interface DayActivity {
+    id: number;
     day: string;
     activity: string;
     startTime: string;
@@ -33,8 +34,18 @@ export default function Schedule1() {
   }
 
   function addSchedules(day: string, activity: string, startTime: string, endTime: string) {
-    setDayInput([...dayInput, { day, activity, startTime, endTime }]);
+    setDayInput([...dayInput, {id: Date.now(), day, activity, startTime, endTime }]);
   }
+
+  function updateSchedule(id:number, field: keyof DayActivity, value: string) {
+    setDayInput(dayInput.map((item) => item.id === id ? { ...item, [field]: value} : item))
+     
+  }
+
+
+
+
+
   return (
     <>
       <Header />
@@ -47,20 +58,20 @@ export default function Schedule1() {
                 onClick={() => {
                   addSchedules(day, activity[0], "", "");
                 }}
-                className="border-2 rounded-full p-1 hover:cursor-auto"
+                className="border-2 rounded-full p-1 hover:cursor-pointer"
               >
                 add
               </button>
               <div className="schedule">
-                {dayInput.filter((item) => item.day === day).map((item, index) => (
-                  <div key={index}>
-                    <select value={item.activity}>
+                {dayInput.filter((item) => item.day === day).map((item) => (
+                  <div key={item.id}>
+                    <select value={item.activity} onChange={(e) => updateSchedule(item.id, "activity", e.target.value)}>
                       {activity.map((act) => (
                         <option key={act} value={act}>{act}</option>
                       ))}
                     </select>
-                    <input type="time" value={item.startTime}/>
-                     <input type="time" value={item.endTime}/>
+                    <input type="time" value={item.startTime} onChange={(e) => updateSchedule(item.id, "startTime", e.target.value)}/>
+                     <input type="time" value={item.endTime} onChange={(e) => updateSchedule(item.id, "endTime", e.target.value)}/>
                   </div>
                 ))}
               
