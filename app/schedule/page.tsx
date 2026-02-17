@@ -42,6 +42,10 @@ export default function Schedule1() {
      
   }
 
+  function deleteSchedule(id:number) {
+    setDayInput(dayInput.filter((item) => item.id != id ))
+  }
+
 
 
 
@@ -72,6 +76,7 @@ export default function Schedule1() {
                     </select>
                     <input type="time" value={item.startTime} onChange={(e) => updateSchedule(item.id, "startTime", e.target.value)}/>
                      <input type="time" value={item.endTime} onChange={(e) => updateSchedule(item.id, "endTime", e.target.value)}/>
+                     <button onClick={() => deleteSchedule(item.id)}> Delete </button>
                   </div>
                 ))}
               
