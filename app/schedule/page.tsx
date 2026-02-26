@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Schedule1() {
   const days: string[] = [
@@ -24,6 +24,7 @@ export default function Schedule1() {
   const [activityInput, setActivityInput] = useState<string>('');
     const [startTimeInput, setStartTimeInput] = useState<string>('');
       const [endTimeInput, setEndTimeInput] = useState<string>('');
+  const [isLoaded, setisLoaded] = useState<boolean>(false);
 
   interface DayActivity {
     id: number;
@@ -46,9 +47,19 @@ export default function Schedule1() {
     setDayInput(dayInput.filter((item) => item.id != id ))
   }
 
+useEffect(() => {
+  const storedActivity = localStorage.getItem('activity');
+  if (storedActivity) {
+    setDayInput(JSON.parse(storedActivity) as DayActivity[]);
+  }
+  setisLoaded(true)
+} , [])
 
-
-
+useEffect(() => {
+  if (isLoaded) {
+    localStorage.setItem('activity', JSON.stringify(dayInput))
+  }
+},  [isLoaded, dayInput]);
 
   return (
     <>
