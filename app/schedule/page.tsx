@@ -64,20 +64,22 @@ useEffect(() => {
   return (
     <>
       <Header />
-      <main className="border-box py-10 px-16">
-        <ul className="mt-4">
+      <main className="border-box py-10 px-12">
+        <ul className="grid grid-cols-7 border-l border-t border-stone-900">
           {days.map((day) => (
-            <li key={day} className="mb-2">
+            
+            <li key={day} className="bg-gray-900 p-4 mb-2">
               {day}
-              <button
+                <button
                 onClick={() => {
                   addSchedules(day, activity[0], "", "");
                 }}
-                className="border-2 rounded-full p-1 hover:cursor-pointer"
+                className=" ml-4 hover:cursor-pointer"
               >
-                add
+                +
               </button>
-              <div className="schedule">
+        
+              <div className="schedule p-2 bg-blue-900">
                 {dayInput.filter((item) => item.day === day).map((item) => (
                   <div key={item.id}>
                     <select value={item.activity} onChange={(e) => updateSchedule(item.id, "activity", e.target.value)}>
