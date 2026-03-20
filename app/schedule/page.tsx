@@ -2,6 +2,8 @@
 
 import Header from "@/components/header";
 import { useEffect, useState } from "react";
+import { DayActivity } from "@/types"
+
 
 export default function Schedule1() {
   const days: string[] = [
@@ -21,18 +23,9 @@ export default function Schedule1() {
     "Sleeping",
   ];
   const [dayInput, setDayInput] = useState<DayActivity[]>([]);
-  const [activityInput, setActivityInput] = useState<string>('');
-    const [startTimeInput, setStartTimeInput] = useState<string>('');
-      const [endTimeInput, setEndTimeInput] = useState<string>('');
   const [isLoaded, setisLoaded] = useState<boolean>(false);
 
-  interface DayActivity {
-    id: number;
-    day: string;
-    activity: string;
-    startTime: string;
-    endTime: string;
-  }
+  
 
   function addSchedules(day: string, activity: string, startTime: string, endTime: string) {
     setDayInput([...dayInput, {id: Date.now(), day, activity, startTime, endTime }]);
@@ -122,7 +115,7 @@ useEffect(() => {
                     onClick={() => deleteSchedule(item.id)}
                     className="text-xs text-gray-500 hover:text-red-400 transition-colors duration-150 text-left cursor-pointer"
                   >
-                    ✕ Supprimer
+                    ✕ Delete
                   </button>
                 </div>
               ))}
