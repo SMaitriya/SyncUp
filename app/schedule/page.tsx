@@ -2,26 +2,13 @@
 
 import Header from "@/components/header";
 import { useEffect, useState } from "react";
-import { DayActivity } from "@/types"
+import { days, activity, DayActivity } from "@/types"
+
+
 
 
 export default function Schedule1() {
-  const days: string[] = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  const activity: string[] = [
-    "Waking up",
-    "Eating",
-    "School",
-    "Work",
-    "Sleeping",
-  ];
+  
   const [dayInput, setDayInput] = useState<DayActivity[]>([]);
   const [isLoaded, setisLoaded] = useState<boolean>(false);
 

@@ -8,6 +8,7 @@ import { DayActivity } from "@/types"
 export default function Home() {
 
  const date = new Date();
+ const day = date.getDay();
  const hours = date.getHours();
  const minutes = date.getMinutes();
  const [storedActivity, setStoredActivity] = useState<DayActivity[]>([])
@@ -16,6 +17,7 @@ export default function Home() {
   const storedActivity = localStorage.getItem('activity');
   if (storedActivity) {
     setStoredActivity(JSON.parse(storedActivity) as DayActivity[]);
+    console.log(storedActivity);
   }
   
  }, [])
@@ -30,6 +32,7 @@ export default function Home() {
 
       <button className="font-bold">Check {hours}:{minutes.toString().padStart(2, '0')}</button>
       <div className='result'> </div>
+       
        </main>
     </>
   )
