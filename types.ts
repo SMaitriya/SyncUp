@@ -5,3 +5,20 @@ export interface DayActivity {
     startTime: string;
     endTime: string;
   }
+
+  export const days: string[] = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  export const activity: string[] = [
+    "Waking up",
+    "Eating",
+    "School",
+    "Work",
+    "Sleeping",
+  ];

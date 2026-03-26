@@ -4,9 +4,6 @@ import Header from "@/components/header";
 import { useEffect, useState } from "react";
 import { days, activity, DayActivity } from "@/types"
 
-
-
-
 export default function Schedule1() {
   
   const [dayInput, setDayInput] = useState<DayActivity[]>([]);
@@ -40,7 +37,8 @@ useEffect(() => {
     localStorage.setItem('activity', JSON.stringify(dayInput))
   }
 },  [isLoaded, dayInput]);
-
+ 
+console.log(days);
  return (
   <>
     <Header />
