@@ -11,14 +11,20 @@ export default function Schedule1() {
 
   
 
-  function addSchedules(day: string, activity: string, startTime: string, endTime: string) {
-    setDayInput([...dayInput, {id: Date.now(), day, activity, startTime, endTime }]);
+  function addSchedules(day: string, activity: string, startTime: string, endTime: string, dayEnd: string) {
+    setDayInput([...dayInput, {id: Date.now(), day, activity, startTime, endTime , dayEnd}]);
   }
 
   function updateSchedule(id:number, field: keyof DayActivity, value: string) {
-    setDayInput(dayInput.map((item) => item.id === id ? { ...item, [field]: value} : item))
-     
-  }
+    setDayInput(dayInput.map((item) => {
+  const realStartTime = field === "startTime" ? value : item.startTime;
+  const realEndTime = field === "endTime" ? value : item.endTime;
+  return item.id === id ? { 
+    ...item, 
+    [field]: value, 
+    dayEnd: realStartTime > realEndTime ? days[(days.indexOf(item.day) + 1) % 7] : "" 
+  } : item;
+}))}
 
   function deleteSchedule(id:number) {
     setDayInput(dayInput.filter((item) => item.id != id ))
@@ -53,7 +59,7 @@ console.log(days);
                 {day}
               </span>
               <button
-                onClick={() => addSchedules(day, activity[0], "", "")}
+                onClick={() => addSchedules(day, activity[0], "", "", "")}
                 className="w-6 h-6 rounded-full bg-gray-700 hover:bg-indigo-600 text-gray-300 hover:text-white text-sm font-bold transition-colors duration-150 flex items-center justify-center cursor-pointer"
               >
                 +
