@@ -4,6 +4,7 @@ export interface DayActivity {
     activity: string;
     startTime: string;
     endTime: string;
+    dayEnd: string;
   }
 
   export const days: string[] = [

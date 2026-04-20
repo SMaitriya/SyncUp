@@ -32,7 +32,16 @@ export default function Home() {
       <Header/>
       <main className='flex justify-center'>
 
-      <div className='result'> {storedActivity.filter( (e) => e.day === day && e.startTime <= time && e.endTime >= time).map((e) => <div key={e.id}> she is at {e.activity} </div>)}</div>
+      <div className='result'> {storedActivity.filter( (e) => {
+        const today = e.day === day;
+        const notOver = e.dayEnd === day;
+
+        return today && ( (e.startTime <= time && e.endTime >= time) || (e.dayEnd !== "" && time >= e.startTime) ) ||notOver && time <= e.endTime}).map((e) => <div key={e.id}> she is at {e.activity} </div>)}</div>
+      
+  
+        
+
+
        
        </main>
     </>
