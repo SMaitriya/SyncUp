@@ -19,7 +19,12 @@ export interface DayActivity {
   export const activity: string[] = [
     "Waking up",
     "Eating",
-    "School",
-    "Work",
+    "Studying",
+    "Working",
     "Sleeping",
   ];
+
+  export interface Timezone {
+    label: string;
+    tz: string;
+  }

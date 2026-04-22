@@ -50,7 +50,6 @@ console.log(days);
     <Header />
     <main className="min-h-screen bg-gray-950 py-6 px-3 sm:py-10 sm:px-4">
       <div className="overflow-x-auto pb-4 custom-scrollbar">
-        {/* Augmentation de la min-width pour éviter l'écrasement sur mobile */}
         <div className="grid grid-cols-7 gap-3 min-w-[1000px] xl:min-w-0">
           {days.map((day) => (
             <div key={day} className="bg-gray-900 rounded-xl border border-gray-800 p-3 flex flex-col gap-3 min-w-[140px]">
@@ -86,7 +85,7 @@ console.log(days);
                       ))}
                     </select>
 
-                    {/* Hours - Stacked on tiny screens, side-by-side on larger */}
+                    {/* Hours */}
                     <div className="flex flex-col gap-1.5">
                       <div className="flex flex-col gap-1">
                         <label className="text-[9px] text-gray-500 uppercase font-bold">Début</label>
