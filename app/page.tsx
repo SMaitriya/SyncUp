@@ -14,18 +14,32 @@ const timezones: Timezone[]= [
 
 export default function Home() {
 
- const date = new Date();
+const [date , setDate] = useState<Date>(new Date());
  const day = days[(date.getDay() - 1 + 7) % 7]
  const hours = date.getHours();
  const minutes = date.getMinutes();
  const time = hours.toString().padStart(2,'0')+":"+minutes.toString().padStart(2, '0')
  const [storedActivity, setStoredActivity] = useState<DayActivity[]>([])
- const [selectTimeZone, setSelectTimeZone] = useState<Timezone>({label: "France", tz: "Europe/Paris"})
+ const [selectTimeZone, setSelectTimeZone] = useState<Timezone>({label: "New York", tz: "America/New_York"})
 
-const herTime = new Date().toLocaleTimeString("fr-FR", { 
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setDate(new Date())
+  },  60_000)
+  return () => clearInterval(interval)
+
+  
+ }, [])
+
+const herTime = date.toLocaleTimeString("fr-FR", { 
   timeZone: selectTimeZone.tz,
   hour: "2-digit", 
   minute: "2-digit" 
+})
+
+const herDay = date.toLocaleDateString("en-US", { 
+  timeZone: selectTimeZone.tz,
+  weekday: "long",
 })
 
 
@@ -65,8 +79,8 @@ const herTime = new Date().toLocaleTimeString("fr-FR", {
         <div className='result '>
           {(() => {
             const current = storedActivity.filter((e) => {
-              const today = e.day === day; 
-              const notOver = e.dayEnd === day;
+              const today = e.day === herDay; 
+              const notOver = e.dayEnd === herDay;
               return (today && ((e.startTime <= herTime && e.endTime >= herTime) || (e.dayEnd !== "" && herTime >= e.startTime))) || (notOver && herTime <= e.endTime);
              });
              return current.length > 0 ? current.map((e) => <div key={e.id} className='mt-4'> She is {e.activity} </div>)
